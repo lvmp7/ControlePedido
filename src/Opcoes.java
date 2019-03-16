@@ -1,0 +1,4 @@
+
+public enum Opcoes {
+	LISTAR,INCLUIR,ALTERAR,EXCLUIR,SAIR;
+}
