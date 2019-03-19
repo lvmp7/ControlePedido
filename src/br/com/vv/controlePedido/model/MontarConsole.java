@@ -2,6 +2,9 @@ package br.com.vv.controlePedido.model;
 
 public class MontarConsole {
 
+	/**
+	 * Exibe o menu principal
+	 */
 	public static void showMenu() {
 		System.out.println();
 		System.out.println("##### MENU PEDIDOS #####");
@@ -14,7 +17,11 @@ public class MontarConsole {
 
 		System.out.flush();
 	}
-
+	
+	/**
+	 * Exibe um pedido
+	 * @param pedido
+	 */
 	public static void showLista(Pedido pedido) {
 		StringBuilder str = new StringBuilder();
 		str.append("\n");
@@ -33,11 +40,13 @@ public class MontarConsole {
 		str.append("Total: R$" + pedido.getValor() + "\n");
 		System.out.println(str.toString());
 	}
-	
+	/**
+	 * Exibe menu de alteração de Pedido
+	 */
 	public static void showAlteraPedido() {
 		StringBuilder str = new StringBuilder();
 		str.append("\n");
-		str.append("Informe o que ser� alterado \n");
+		str.append("Informe o que ser� alterado \n");
 		str.append("1. Cliente \n");
 		str.append("2. Filial \n");
 		str.append("3. Editar um itens \n");
@@ -46,16 +55,17 @@ public class MontarConsole {
 		
 		System.out.println(str.toString());
 	}
-	
+	/**
+	 * Exibe menu de alteração de item
+	 */
 	public static void showAlteraItem() {
 		StringBuilder str = new StringBuilder();
 		str.append("\n");
-		str.append("Informe o que ser� alterado \n");
+		str.append("Informe o que ser� alterado \n");
 		str.append("1. Nome \n");
 		str.append("2. Valor \n");
 		str.append("3. Quantidade \n");
 		
 		System.out.println(str.toString());
 	}
-	
 }

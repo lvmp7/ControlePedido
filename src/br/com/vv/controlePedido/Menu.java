@@ -6,6 +6,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import br.com.vv.controlePedido.interfaces.PedidoDataSource;
 import br.com.vv.controlePedido.model.ItemPedido;
 import br.com.vv.controlePedido.model.MontarConsole;
 import br.com.vv.controlePedido.model.Pedido;
@@ -17,7 +18,7 @@ public class Menu {
 		new PedidoFileDataSource().listar();
 		
 		int opc = -1;
-		PedidoMemoryDataSource pedidoDAO = new PedidoMemoryDataSource();
+		PedidoDataSource pedidoDAO = new PedidoMemoryDataSource();
 		Scanner s = new Scanner(System.in);
 
 		do {
@@ -35,7 +36,7 @@ public class Menu {
 		s.close();
 	}
 	
-	public static void validaOpcao(int key, PedidoMemoryDataSource dao) {
+	public static void validaOpcao(int key, PedidoDataSource dao) {
 		Scanner s = new Scanner(System.in);
 		
 		switch (key) {
@@ -56,7 +57,7 @@ public class Menu {
 			}else {
 				MontarConsole.showAlteraPedido();			
 				p.setDataHoraEdicao(LocalDateTime.now());
-				dao.alterar(codigo, alteraDadosPedido(s.nextInt(), p) );
+				dao.alterar(alteraDadosPedido(s.nextInt(), p));
 			}
 			break;
 		case 4:
