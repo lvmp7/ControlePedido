@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Pedido extends Base {
 	private static int contadorPedido = 1;
-	private int contadorItem = 1;
 	private String nomeCliente;
 	private String nomeFilial;
 	private List<ItemPedido> itens = new ArrayList<ItemPedido>();
@@ -50,6 +49,15 @@ public class Pedido extends Base {
 	
 	public void adiciona(ItemPedido item) {
 		itens.add(item);
+	}
+	
+	public ItemPedido getItem(int codigo) {
+		for (ItemPedido itemPedido : itens) {
+			if(itemPedido.getCodigo() == codigo) {
+				return itemPedido;
+			}
+		}
+		return null;
 	}
 	
 	public void remove(ItemPedido item) {
