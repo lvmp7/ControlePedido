@@ -15,6 +15,11 @@ public class ItemPedido extends Base {
 		this.nome = nome;
 	}
 	
+	@Override
+	public int getCodigo() {
+		return super.getCodigo();
+	}
+	
 	public String getNome() {
 		return nome;
 	}
