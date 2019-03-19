@@ -1,33 +1,30 @@
-package model;
+package br.com.vv.controlePedido.model;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 public class Base {
 	 private int codigo;
-	 private Calendar dataHoraInclusao;
-	 private Calendar dataHoraEdicao;
+	 private LocalDateTime dataHoraInclusao;
+	 private LocalDateTime dataHoraEdicao;
 	
 	 public Base(int codigo) {
 		this.codigo = codigo;
+		dataHoraInclusao = LocalDateTime.now();
 	}
 
 	public int getCodigo() {
 		return codigo;
 	}
 	
-	public void setDataHoraInclusao(Calendar dataHoraInclusao) {
-		this.dataHoraInclusao = dataHoraInclusao;
-	}
-	
-	public Calendar getDataHoraInclusao() {
+	public LocalDateTime getDataHoraInclusao() {
 		return dataHoraInclusao;
 	}
 	
-	public void setDataHoraEdicao(Calendar dataHoraEdicao) {
+	public void setDataHoraEdicao(LocalDateTime dataHoraEdicao) {
 		this.dataHoraEdicao = dataHoraEdicao;
 	}
 	
-	public Calendar getDataHoraEdicao() {
+	public LocalDateTime getDataHoraEdicao() {
 		return dataHoraEdicao;
 	}
 	

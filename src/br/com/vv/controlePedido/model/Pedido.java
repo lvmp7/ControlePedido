@@ -1,38 +1,46 @@
-package model;
+package br.com.vv.controlePedido.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido extends Base {
 	private static int contadorPedido = 1;
+	private int contadorItem = 1;
 	private String nomeCliente;
 	private String nomeFilial;
 	private List<ItemPedido> itens = new ArrayList<ItemPedido>();
-
 	
 	public Pedido(String nomeCliente, String nomeFilial) {
-		super(Pedido.contadorPedido);
+		super(Pedido.contadorPedido++);
 		this.nomeCliente = nomeCliente;
 		this.nomeFilial = nomeFilial;
-		Pedido.contadorPedido++;
 	}
 	
 	public String getNomeCliente() {
 		return nomeCliente;
 	}
 	
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+	
 	public String getNomeFilial() {
 		return nomeFilial;
 	}
 	
-	public double getValor() {
-		double aux = 0;
-		/*for (ItemPedido itemPedido : itens) {
-			aux +=itemPedido.getValor();
+	public void setNomeFilial(String nomeFilial) {
+		this.nomeFilial = nomeFilial;
+	}
+	
+	public BigDecimal getValor() {
+		BigDecimal aux = BigDecimal.ZERO;
+		
+		for (ItemPedido item : itens) {
+			aux = aux.add(
+					item.getValor().multiply(new BigDecimal(item.getQuantidade()))
+			);
 		}
-		*/
-		aux = itens.stream().mapToDouble(item->item.getValor()).sum();
-		System.out.println(aux);
 		return aux;
 	}
 	
@@ -47,5 +55,4 @@ public class Pedido extends Base {
 	public void remove(ItemPedido item) {
 		itens.remove(item);
 	}
-	
 }
