@@ -1,4 +1,7 @@
-package br.com.vv.controlePedido.model;
+package br.com.vv.controlePedido;
+
+import br.com.vv.controlePedido.model.ItemPedido;
+import br.com.vv.controlePedido.model.Pedido;
 
 public class MontarConsole {
 	/**
