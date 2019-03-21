@@ -11,25 +11,25 @@ public interface PedidoDataSource {
 	/**
 	 * lista de pedidos
 	 */
-	public abstract void listar();
+	void listar();
 	
 	/**
 	 * inclui um pedido
 	 * @param pedido
 	 */
-	public abstract void incluir(Pedido pedido);
+	void incluir(Pedido pedido);
 	/**
 	 * Altera um Pedido
 	 * @param pedido
 	 * Pedido para ser alterado
 	 */
-	public abstract void alterar(Pedido pedido);
+	void alterar(Pedido pedido);
 	/**
 	 * Exclui um pedido
 	 * @param codigo
 	 * pedido que será excluido
 	 */
-	public abstract void excluir(int codigo);
+	void excluir(int codigo);
 	/**
 	 * Retorna um pedido 
 	 * @param codigo
@@ -37,5 +37,5 @@ public interface PedidoDataSource {
 	 * @return
 	 * Retorna o Pedido que continha o codigo pesquisado
 	 */
-	public abstract Pedido find(int codigo);
+	Pedido find(int codigo);
 }
