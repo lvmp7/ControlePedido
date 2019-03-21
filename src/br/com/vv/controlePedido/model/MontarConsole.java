@@ -1,7 +1,6 @@
 package br.com.vv.controlePedido.model;
 
 public class MontarConsole {
-
 	/**
 	 * Exibe o menu principal
 	 */

@@ -1,9 +1,14 @@
 package br.com.vv.controlePedido.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Base {
-	 private int codigo;
+public class Base implements Serializable {
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int codigo;
 	 private LocalDateTime dataHoraInclusao;
 	 private LocalDateTime dataHoraEdicao;
 	 
