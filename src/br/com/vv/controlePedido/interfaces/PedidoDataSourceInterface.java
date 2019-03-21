@@ -7,7 +7,7 @@ import br.com.vv.controlePedido.model.Pedido;
  * @author Luiz Vinícius
  *
  */
-public interface PedidoDataSource {
+public interface PedidoDataSourceInterface {
 	/**
 	 * lista de pedidos
 	 */
