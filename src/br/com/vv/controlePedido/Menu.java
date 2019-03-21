@@ -6,20 +6,30 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import br.com.vv.controlePedido.interfaces.PedidoDataSource;
+import br.com.vv.controlePedido.interfaces.PedidoDataSourceInterface;
 import br.com.vv.controlePedido.model.ItemPedido;
-import br.com.vv.controlePedido.model.MontarConsole;
 import br.com.vv.controlePedido.model.Pedido;
 
 public class Menu {
 	
 	public static void main(String[] args) {
-		
-		new PedidoFileDataSource().listar();
-		
-		int opc = -1;
-		PedidoDataSource pedidoDAO = new PedidoMemoryDataSource();
 		Scanner s = new Scanner(System.in);
+		PedidoDataSourceInterface dataSource;
+		
+		System.out.println("Digite \"s\" para salvar em Memoria ");
+		System.out.println("ou pressione \"Enter\" para continuar a salvando em Arquivo ");
+		
+		if (s.next().toLowerCase().equals("s") ) { 
+			System.out.println("Salvando em Memoria");
+			dataSource = new PedidoMemoryDataSourceImpl();
+		}
+		else {
+			System.out.println("Salvando em arquivo");
+			dataSource = new PedidoFileDataSourceImpl();
+		}
+		s.reset();
+		
+		int opc = -1;		
 
 		do {
 			MontarConsole.showMenu();
@@ -27,7 +37,7 @@ public class Menu {
 			
 			try{
 				opc = s.nextInt();
-				validaOpcao(opc,pedidoDAO);
+				validaOpcao(opc,dataSource);
 			}catch (InputMismatchException e) {
 				System.out.print("Favor entrar com um NUMERO valido");
 				System.out.println();
@@ -36,7 +46,7 @@ public class Menu {
 		s.close();
 	}
 	
-	public static void validaOpcao(int key, PedidoDataSource dao) {
+	public static void validaOpcao(int key, PedidoDataSourceInterface dao) {
 		Scanner s = new Scanner(System.in);
 		
 		switch (key) {
