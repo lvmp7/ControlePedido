@@ -1,16 +1,15 @@
-package br.com.vv.controlePedido;
+package br.com.vv.controlePedido.dataSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.vv.controlePedido.interfaces.PedidoDataSource;
-import br.com.vv.controlePedido.model.MontarConsole;
+import br.com.vv.controlePedido.MontarConsole;
+import br.com.vv.controlePedido.interfaces.DataSource;
 import br.com.vv.controlePedido.model.Pedido;
 
 //base de dados em memoria
-public class PedidoMemoryDataSource implements PedidoDataSource {
+public class PedidoMemoryDataSourceImpl implements DataSource {
 	private List<Pedido> pedidos = new ArrayList<Pedido>();
-	
 	/**
 	 * lista de pedidos
 	 */
@@ -61,7 +60,7 @@ public class PedidoMemoryDataSource implements PedidoDataSource {
 	 * @param codigo
 	 * codigo do pedido pesquisado
 	 * @return
-	 * Retorna o Pedido que continha o codigo pesquisado
+	 * Retorna o Pedido que contenha o codigo pesquisado
 	 */
 	public Pedido find(int codigo) {
 		for (Pedido pedido : pedidos) {
@@ -69,5 +68,5 @@ public class PedidoMemoryDataSource implements PedidoDataSource {
 				return pedido; 
 		}
 		return null;
-	}	
+	}
 }

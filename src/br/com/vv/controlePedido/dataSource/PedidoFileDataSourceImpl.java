@@ -1,62 +1,52 @@
-package br.com.vv.controlePedido;
+package br.com.vv.controlePedido.dataSource;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.TrueFileFilter;
 
-import br.com.vv.controlePedido.interfaces.PedidoDataSource;
-import br.com.vv.controlePedido.model.MontarConsole;
+import br.com.vv.controlePedido.MontarConsole;
+import br.com.vv.controlePedido.interfaces.DataSource;
 import br.com.vv.controlePedido.model.Pedido;
 
-public class PedidoFileDataSource implements PedidoDataSource {
+public class PedidoFileDataSourceImpl implements DataSource {
 	private List<Pedido> pedidos;
-	private List<File> files;
-	
-	public PedidoFileDataSource() {
-		// TODO Auto-generated constructor stub
-		files = (List<File>) FileUtils.listFiles(new File("pedidos"), TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
-		for (File file : files) {
-			convert(file);
-			System.out.println(file.getAbsolutePath());
-		}
-	}
-	
 	/**
-	 * lista de pedidos
+	 * lista pedidos
 	 */
-	public void listar(){		
-		for (Pedido pedido : pedidos) {
-			MontarConsole.showLista(pedido);
-		}
+	public void listar(){
+		pedidos = carregaLista();
+		if(!pedidos.isEmpty())
+			for (Pedido pedido : pedidos) {
+				MontarConsole.showLista(pedido);;
+			}
 	}
 	/**
 	 * inclui um pedido
 	 * @param pedido
 	 */
 	public void incluir(Pedido pedido) {
-		// TODO Auto-generated method stub
-		
-		try {
-			ObjectOutputStream o = new ObjectOutputStream(FileUtils.openOutputStream(new File("pedidos\\"+pedido.getCodigo())));
-			o.writeObject(pedido);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		pedidos.add(pedido);
+		save();
 	}
+	
 	/**
 	 * Altera um Pedido
 	 * @param pedido
 	 * Pedido para ser alterado
 	 */
 	public void alterar(Pedido pedido) {
-		// TODO Auto-generated method stub
-
+		for (int i = 0; i < pedidos.size(); i++) {
+			if (pedidos.get(i).equals(pedido)) {
+				pedidos.add(i,pedido);
+				break;
+			}
+		}
+		save();
 	}
 	/**
 	 * Exclui um pedido
@@ -64,8 +54,12 @@ public class PedidoFileDataSource implements PedidoDataSource {
 	 * pedido que será excluido
 	 */
 	public void excluir(int codigo) {
-		// TODO Auto-generated method stub
-
+		for (int i = 0; i < pedidos.size(); i++) {
+			if(pedidos.get(i).getCodigo() == codigo) {
+				pedidos.remove(i);
+			}
+		}
+		save();
 	}
 	/**
 	 * Retorna um pedido 
@@ -75,21 +69,38 @@ public class PedidoFileDataSource implements PedidoDataSource {
 	 * Retorna o Pedido que continha o codigo pesquisado
 	 */
 	public Pedido find(int codigo) {
-		// TODO Auto-generated method stub
+		for (Pedido pedido : pedidos) {
+			if (pedido.getCodigo() == codigo) {
+				return pedido;
+			}
+		}
 		return null;
 	}
 	
-	private Pedido convert(File file) {
-		Pedido p;
+	private List<Pedido> carregaLista(){
+		FileUtils.getFile("pedidos");
+		
 		try {
-			ObjectInputStream o = new ObjectInputStream(FileUtils.openInputStream(file));
-			p = (Pedido) o.readObject();
-			return p;
+			ObjectInputStream o = new ObjectInputStream(FileUtils.openInputStream(new File("pedidos")));
+			return (List<Pedido>) o.readObject();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Arquivo pedidos não foi encontrado");
+			return new ArrayList<Pedido>();
+			//e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		
 		return null;
+	}
+	
+	private void save() {
+		try {
+			File arquivo = new File("pedidos");			
+			ObjectOutputStream o = new ObjectOutputStream(FileUtils.openOutputStream(arquivo));
+			o.writeObject(pedidos);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
