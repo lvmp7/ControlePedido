@@ -6,32 +6,26 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import br.com.vv.controlePedido.dataSource.PedidoDataSource;
-import br.com.vv.controlePedido.dataSource.PedidoFileDataSourceImpl;
-import br.com.vv.controlePedido.dataSource.PedidoMemoryDataSourceImpl;
-import br.com.vv.controlePedido.interfaces.DataSource;
+import br.com.vv.controlePedido.interfaces.PedidoDataSourceInterface;
 import br.com.vv.controlePedido.model.ItemPedido;
 import br.com.vv.controlePedido.model.Pedido;
-
-
 
 public class Menu {
 	
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
-		PedidoDataSource dataSource;
+		PedidoDataSourceInterface dataSource;
 		
-		System.out.println("Digite \"M\" para salvar em Memoria ");
-		System.out.println("ou pressione \"A\" para continuar a salvando em Arquivo ");
+		System.out.println("Digite \"s\" para salvar em Memoria ");
+		System.out.println("ou pressione \"Enter\" para continuar a salvando em Arquivo ");
 		
-		if (s.next().toLowerCase().equals("m") ) { 
+		if (s.next().toLowerCase().equals("s") ) { 
 			System.out.println("Salvando em Memoria");
-			
-			dataSource = new PedidoDataSource(new PedidoMemoryDataSourceImpl());
+			dataSource = new PedidoMemoryDataSourceImpl();
 		}
 		else {
 			System.out.println("Salvando em arquivo");
-			dataSource = new PedidoDataSource( new PedidoFileDataSourceImpl() );
+			dataSource = new PedidoFileDataSourceImpl();
 		}
 		s.reset();
 		
@@ -52,7 +46,7 @@ public class Menu {
 		s.close();
 	}
 	
-	public static void validaOpcao(int key, DataSource dao) {
+	public static void validaOpcao(int key, PedidoDataSourceInterface dao) {
 		Scanner s = new Scanner(System.in);
 		
 		switch (key) {
@@ -86,8 +80,8 @@ public class Menu {
 			break;
 
 		default:
-			System.out.println("Opçãoo inválida!");
-			System.out.println("Favor inserir um numero válido");
+			System.out.println("Op��o inv�lida!");
+			System.out.println("Favor inserir um numero v�lido");
 			System.out.println();
 			break;
 		}
