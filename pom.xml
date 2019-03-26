@@ -22,5 +22,13 @@
 
 	<build>
 		<finalName>controlePedido</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.1.1</version>
+				<configuration><descriptorRefs><descriptorRef>jar-with-dependencies</descriptorRef></descriptorRefs></configuration>
+			</plugin>
+		</plugins>
 	</build>
+	
 </project>
